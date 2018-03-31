@@ -1,0 +1,14 @@
+*.db
+*.opendb
+*.ilk
+*.pdb
+*.log
+*.tlog
+*.tli
+*.tlh
+*.obj
+*.idb
+*.dmp
+/.vs
+/Debug
+/Release
