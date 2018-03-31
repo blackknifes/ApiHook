@@ -1,8 +1,8 @@
-#include "DllHook.h"
 #include <conio.h>
-#include <tlhelp32.h>
+#include <stdio.h>
+#include "ApiHook.h"
 
-#define INJECT_DLL "AliWorkbench.exe"
+#define INJECT_PROCESS "AliWorkbench.exe"
 
 int main()
 {
@@ -27,14 +27,13 @@ int main()
 		&si,
 		&pi
 	);
-	int result = DllHook::InjectDll(INJECT_DLL, "WndTest.dll");
+	int result = injectDll(INJECT_PROCESS, "WndTest.dll");
 	for (size_t i = 0; i < 10000 && result != 0; ++i)
-	{
-		result = DllHook::InjectDll(INJECT_DLL, "WndTest.dll");
-	}
+		result = injectDll(INJECT_PROCESS, "WndTest.dll");
+
 	if (result != 0)
 	{
-		printf("dll注入结果: %d\n", result);
+		printf("dll注入失败: %d\n", result);
 		_getch();
 	}
 	return 0;

@@ -107,13 +107,13 @@ MemoryPointer::MemoryPointer()
 }
 
 MemoryPointer::MemoryPointer(size_t offset)
-	: offset(offset)
+	:offset(offset)
 {
 
 }
 
 MemoryPointer::MemoryPointer(const void* pData)
-	: offset((size_t)pData)
+	:offset((size_t)pData)
 {
 
 }
@@ -167,7 +167,7 @@ void freeFunctionEntry(void* pEntry)
 {
 	if (pEntry == NULL)
 		return;
-	delete[](char*)pEntry;
+	delete[] (char*)pEntry;
 }
 
 ApiHook setApiHook(void* pOldApi, void* pNewApi)
@@ -181,7 +181,7 @@ ApiHook setApiHook(void* pOldApi, void* pNewApi)
 	//hook部分代码写入新地址
 	memcpy_s(pEntry, jmpCmdSize, pOldApi, jmpCmdSize);
 	//新地址后半部分改为jmp到原地址+5
-	pEntry[jmpCmdSize] = (char)0xE9;
+	pEntry[jmpCmdSize]  = (char)0xE9;
 	size_t originAddr = calJmpOffset(&pEntry[jmpCmdSize], (size_t)pOldApi + jmpCmdSize, jmpCmdSize);
 
 	writeMemoryOffset(pEntry, jmpCmdSize + 1, originAddr);
@@ -224,7 +224,7 @@ ApiHook::ApiHook()
 }
 
 ApiHook::ApiHook(std::nullptr_t)
-	: pEntry(NULL)
+	:pEntry(NULL)
 {
 
 }
@@ -260,12 +260,12 @@ InjectProcess::InjectProcess()
 }
 
 InjectProcess::InjectProcess(const char* name)
-	: hProcess(NULL)
+	:hProcess(NULL)
 {
 	hProcess = FindProcess(name);
 }
 InjectProcess::InjectProcess(const wchar_t* name)
-	: hProcess(NULL)
+	:hProcess(NULL)
 {
 	hProcess = FindProcess(name);
 }

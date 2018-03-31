@@ -12,3 +12,5 @@
 /.vs
 /Debug
 /Release
+/bin
+/build
